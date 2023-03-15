@@ -4,13 +4,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class finsihline : MonoBehaviour
 {
+    [SerializeField] float loadDelay = 1f;
+    [SerializeField] ParticleSystem finishEffect;
      void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
-            SceneManager.LoadScene(0);
-            Debug.Log("You finished!");
+            finishEffect.Play();
+            Invoke("ReloadScene", loadDelay);
+         
         }
+    }
+
+    void ReloadScene()
+    {
+        SceneManager.LoadScene(0);
     }
 
 }
